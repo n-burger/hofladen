@@ -3,6 +3,7 @@
     <form @submit.prevent="handleSubmit">
       <label>Farm name</label>
       <input
+        ref="first"
         type="text"
         :class="{ 'has-error': submitting && invalidName }"
         v-model="farm.name"
@@ -57,6 +58,8 @@ export default {
       }
 
       this.$emit("add:farm", this.farm);
+      this.$refs.first.focus()
+
       this.farm = {
         name: "",
         email: ""
