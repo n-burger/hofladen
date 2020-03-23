@@ -1,28 +1,63 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="small-container">
+    <h1>Farms</h1>
+
+    <farm-form @add:farm="addFarm" />
+    <farm-table :farms="farms" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FarmTable from "@/components/FarmTable.vue";
+import FarmForm from "@/components/FarmForm.vue";
 
 export default {
-  name: 'App',
+  name: "app",
   components: {
-    HelloWorld
+    FarmTable,
+    FarmForm
+  },
+  data() {
+    return {
+      farms: [
+        {
+          id: 1,
+          name: "Chuebodenalp",
+          email: "chuebodenalp@schweiz.ch"
+        },
+        {
+          id: 2,
+          name: "Hinterfultigen",
+          email: "hinterfultigen@gantrisch.ch"
+        },
+        {
+          id: 3,
+          name: "Uettligen",
+          email: "uettligen@frienisberg.ch"
+        }
+      ]
+    };
+  },
+  methods: {
+    addFarm(farm) {
+      const lastId =
+        this.farms.length > 0 ? this.farms[this.farms.length - 1].id : 0;
+      const id = lastId + 1;
+      const newFarm = { ...farm, id };
+
+      this.farms = [...this.farms, newFarm];
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+button {
+  background: #009435;
+  border: 1px solid #009435;
+}
+
+.small-container {
+  max-width: 680px;
 }
 </style>
